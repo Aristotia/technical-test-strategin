@@ -10,7 +10,7 @@
 }
 
 
-.App-header{
+.App-header-footer{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,11 +21,30 @@
 }
 
 .connexion-page{
-  height: 90vh;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.footer{
+  background-color: var(--additional-color1);
+}
+
+.button-container{
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+.button-container button{
+  width: 50%;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
 }
 
 .connexion-component{
@@ -35,9 +54,9 @@
   justify-content: center;
   align-items: center;
   height: 50%;
-  width: 20rem;
+  width: 40rem;
   border: 2px solid var(--additional-color2);
-  border-radius: 15px;
+  border-radius: 0px 0px 15px 15px;
 }
 
 .connexion-component form{
@@ -46,8 +65,17 @@
   flex-direction: column;
   width: 80%;
 }
- #inputSubmit{
+
+.connexion-component input{
+  width: 25rem;
+  height: 1.5rem;
+}
+
+#inputSubmit{
+  font-weight: bold;
+  padding: 2rem;
   margin: 2rem;
+  height: 2rem;
   border-radius: 15px;
   border: none;
   padding: 0.5rem;
