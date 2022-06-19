@@ -1,20 +1,17 @@
-import './App.css'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Accueil from './Pages/Accueil';
+import UserManagement from './Pages/UserManagement';
 
-function App() {
+export default function () {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>My tecnical test for Strateg.in</h1>
-      </header>
-      <main className='connexion-page'>
-        <div className='connexion-component'>
-          <form>
-            
-          </form>
-        </div>
-      </main>
+    <div>
+      <Router>
+        <Routes>
+          <Route path='/' element={<Accueil />} />
+          <Route path='/users' element={<UserManagement />} />
+        </Routes>
+      </Router>
     </div>
-  )
+  );
 }
-
-export default App
