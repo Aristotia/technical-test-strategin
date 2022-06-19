@@ -12,7 +12,8 @@ const {
 router.get('/', findAll)
 router.get('/search', search)
 router.get('/:id', findById)
-router.post('/', create)
+router.post('/users/register', register)
+router.post('/users/login', login)
 router.put('/:id', update)
 router.delete('/:id', deleteById)
 
