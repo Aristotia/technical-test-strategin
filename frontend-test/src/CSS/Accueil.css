@@ -6,6 +6,7 @@
   --text-color: rgb(174, 144, 115);
   --additional-color1: rgb(218, 194, 167);
   --additional-color2: rgb(186, 164, 149);
+  box-sizing: content-box;
 }
 
 
@@ -13,7 +14,41 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--additional-color2);
+  background-color: var(--additional-color1);
   color: var(--background-color);
+  height: 10vh;
+  border: 2px solid var(--additional-color2);
 }
 
+.connexion-page{
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.connexion-component{
+  display: flex ;
+  flex-direction: column;
+  background-color: var(--additional-color1);
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+  width: 20rem;
+  border: 2px solid var(--additional-color2);
+  border-radius: 15px;
+}
+
+.connexion-component form{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 80%;
+}
+ #inputSubmit{
+  margin: 2rem;
+  border-radius: 15px;
+  border: none;
+  padding: 0.5rem;
+}
