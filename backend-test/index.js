@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const argon2 = require('argon2');
+var jwt = require('jsonwebtoken');
 require('dotenv').config();
 const UserSchema = require('./src/models/UserSchema');
 
@@ -52,9 +53,17 @@ mongoose
       try {
         const user = await UserSchema.find({ email: email });
         console.log(user);
-        const hash = user.password;
+        const hash = user[0].password;
+        console.log(hash, password);
         if (await argon2.verify(hash, password)) {
-          return res.status(200).send(user);
+          const token = jwt.sign({ email: email, password: password }, process.env.JWT_AUTH_SECRET, {expiresIn: 
+            '24h'});
+          
+          return res.status(200).send({
+            email: email,
+            password: password,
+            token: token,
+          });
         } else {
           res.status(401).send({ error: 'Préciser le mot de passe/email' });
         }
