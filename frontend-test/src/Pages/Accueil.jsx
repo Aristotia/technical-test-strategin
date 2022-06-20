@@ -20,7 +20,7 @@ export default function App() {
 
     axios
       .post(
-        `mongodb+srv://<username>:<password>@test-strategin.gwwcb6x.mongodb.net/?retryWrites=true&w=majority` ??
+        `mongodb+srv://Antoine:bangarang@test-strategin.gwwcb6x.mongodb.net/?retryWrites=true&w=majority` ??
           'http://localhost:27017',
         {
           email: email,
@@ -36,7 +36,7 @@ export default function App() {
 
     axios
       .post(
-        `mongodb+srv://<username>:<password>@test-strategin.gwwcb6x.mongodb.net/?retryWrites=true&w=majority` ??
+        `mongodb+srv://Antoine:bangarang@test-strategin.gwwcb6x.mongodb.net/?retryWrites=true&w=majority` ??
           'http://localhost:27017',
         {
           firstname: firstname,
@@ -71,16 +71,10 @@ export default function App() {
       <main className='connexion-page'>
         <div className='interface-container'>
           <div className='button-container'>
-            <button
-              type='button'
-              onClick={handleConnexionDisplay}
-            >
+            <button type='button' onClick={handleConnexionDisplay}>
               <h3>Se connecter</h3>
             </button>
-            <button
-              type='button'
-              onClick={handleConnexionDisplay}
-            >
+            <button type='button' onClick={handleConnexionDisplay}>
               <h3>Créer un compte</h3>
             </button>
           </div>
