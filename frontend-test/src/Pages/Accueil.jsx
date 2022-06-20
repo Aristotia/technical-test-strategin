@@ -55,6 +55,7 @@ export default function App() {
 
   const handleChangeFirstname = (event) => {
     setEmail(event.target.value);
+    console.log(email)
   };
 
   const handleChangeLastname = (event) => {

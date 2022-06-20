@@ -4,17 +4,16 @@ const {
   findAll,
   findById,
   search,
-  register,
-  login,
+  create,
   update,
   deleteById,
-} = require('../controllers/controller.todo')
+} = require('../controllers/UserController')
 
 router.get('/', findAll)
 router.get('/search', search)
 router.get('/:id', findById)
-router.post('/users/register', register)
-router.post('/users/login', login)
+router.post('/users/register', create)
+router.post('/users/login', create)
 router.put('/:id', update)
 router.delete('/:id', deleteById)
 
