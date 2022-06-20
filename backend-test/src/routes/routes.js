@@ -4,7 +4,8 @@ const {
   findAll,
   findById,
   search,
-  create,
+  register,
+  login,
   update,
   deleteById,
 } = require('../controllers/controller.todo')
