@@ -1,31 +1,37 @@
 import React from 'react';
 
-export default function ConnexionInterface({ handleChangeFirstname, handleChangeLastname, handleChangeEmail, handleChangePassword, handleRegister }) {
+export default function ConnexionInterface({
+  onChange,
+  handleRegister,
+}) {
   return (
     <div className='RegisterInterface'>
       <div className='connexion-component'>
         <form onSubmit={handleRegister}>
           <h3>Prénom: </h3>
-          <label htmlFor='firstname'>
+          <label htmlFor='firstName'>
             <input
               type='text'
-              onChange={handleChangeFirstname}
+              name='firstName'
+              onChange={onChange}
               id='registerFirstname'
             />
           </label>
           <h3>Nom: </h3>
-          <label htmlFor='lastname'>
+          <label htmlFor='lastName'>
             <input
               type='text'
-              onChange={handleChangeLastname}
-              id='registerLastname'
+              name='lastName'
+              onChange={onChange}
+              id='registerLastName'
             />
           </label>
           <h3>Email: </h3>
           <label htmlFor='email'>
             <input
               type='email'
-              onChange={handleChangeEmail}
+              name='email'
+              onChange={onChange}
               id='registerEmail'
             />
           </label>
@@ -33,11 +39,12 @@ export default function ConnexionInterface({ handleChangeFirstname, handleChange
           <label htmlFor='password'>
             <input
               type='password'
-              onChange={handleChangePassword}
+              name='password'
+              onChange={onChange}
               id='loginPassword'
             />
           </label>
-          <input type='submit' value='Se connecter' id='inputSubmit' />
+          <input type='submit' value={`S'enregistrer`} id='inputSubmit' />
         </form>
       </div>
     </div>

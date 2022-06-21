@@ -1,15 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const {
-  findAll,
-  findById,
-  search,
-  create,
-  update,
-  deleteById,
-} = require('../controllers/UserController')
 
-router.get('/', findAll)
+router.get('/users', findAll)
 router.get('/search', search)
 router.get('/:id', findById)
 router.post('/users/register', create)

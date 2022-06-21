@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ConnexionInterface from '../Components/Unique/ConnexionInterface';
 import Header from '../Components/Commons/Header';
 import RegisterInterface from '../Components/Unique/RegisterInterface';
@@ -7,64 +8,55 @@ import '../CSS/Accueil.css';
 import Footer from '../Components/Commons/Footer';
 
 export default function App() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [form, setForm] = useState({
+    email: '',
+    firstName: '',
+    lastName: '',
+    password: '',
+  });
   const [display, setDisplay] = useState(true);
-
-  const handleConnexionDisplay = () => {
+  let navigate = useNavigate();
+  const handleInterfaceDisplay = () => {
     setDisplay(!display);
   };
 
-  const handleConnexion = (event, data) => {
+  const handleConnexion = (event) => {
     event.preventDefault();
 
     axios
-      .post(
-        `mongodb+srv://Antoine:bangarang@test-strategin.gwwcb6x.mongodb.net/?retryWrites=true&w=majority` ??
-          'http://localhost:27017',
-        {
-          email: email,
-          password: password,
-        }
-      )
+      .post('http://localhost:5000/users/login', {
+        email: email,
+        password: password,
+      })
+      .then(() => {
+        navigate('/users', { replace: true });
+      })
+      .catch((error) => console.error(error));
+  };
+
+  const handleRegister = (event) => {
+    event.preventDefault();
+
+    axios
+      .post('http://localhost:5000/users/register', {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+      })
       .then((data) => console.log(data))
       .catch((error) => console.error(error));
   };
 
-  const handleRegister = (event, data) => {
-    event.preventDefault();
-
-    axios
-      .post(
-        `mongodb+srv://Antoine:bangarang@test-strategin.gwwcb6x.mongodb.net/?retryWrites=true&w=majority` ??
-          'http://localhost:27017',
-        {
-          firstname: firstname,
-          lastname: lastname,
-          email: email,
-          password: password,
-        }
-      )
-      .then((data) => console.log(data))
-      .catch((error) => console.error(error));
+  const onChange = (event) => {
+    setForm({
+      ...form,
+      [event.target.name]: event.target.value,
+    });
+    console.log(form);
   };
 
-  const handleChangeEmail = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handleChangeFirstname = (event) => {
-    setEmail(event.target.value);
-    console.log(email)
-  };
-
-  const handleChangeLastname = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handleChangePassword = (event) => {
-    setPassword(event.target.value);
-  };
+  const { firstName, lastName, email, password } = form;
 
   return (
     <div className='App'>
@@ -72,25 +64,21 @@ export default function App() {
       <main className='connexion-page'>
         <div className='interface-container'>
           <div className='button-container'>
-            <button type='button' onClick={handleConnexionDisplay}>
+            <button type='button' onClick={handleInterfaceDisplay}>
               <h3>Se connecter</h3>
             </button>
-            <button type='button' onClick={handleConnexionDisplay}>
+            <button type='button' onClick={handleInterfaceDisplay}>
               <h3>Créer un compte</h3>
             </button>
           </div>
           {display ? (
             <ConnexionInterface
-              handleChangeEmail={handleChangeEmail}
-              handleChangePassword={handleChangePassword}
+              onChange={onChange}
               handleConnexion={handleConnexion}
             />
           ) : (
             <RegisterInterface
-              handleChangeFirstname={handleChangeFirstname}
-              handleChangeLastname={handleChangeLastname}
-              handleChangeEmail={handleChangeEmail}
-              handleChangePassword={handleChangePassword}
+              onChange={onChange}
               handleRegister={handleRegister}
             />
           )}

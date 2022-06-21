@@ -1,8 +1,7 @@
 import React from 'react';
 
 export default function ConnexionInterface({
-  handleChangeEmail,
-  handleChangePassword,
+  onChange,
   handleConnexion,
 }) {
   return (
@@ -11,13 +10,19 @@ export default function ConnexionInterface({
         <form onSubmit={handleConnexion}>
           <h3>Email: </h3>
           <label htmlFor='email'>
-            <input type='email' onChange={handleChangeEmail} id='loginEmail' />
+            <input
+              type='email'
+              name='email'
+              onChange={onChange}
+              id='loginEmail'
+            />
           </label>
           <h3>Mot de passe: </h3>
           <label htmlFor='password'>
             <input
               type='password'
-              onChange={handleChangePassword}
+              name='password'
+              onChange={onChange}
               id='loginPassword'
             />
           </label>

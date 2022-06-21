@@ -1,9 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const argon2 = require('argon2');
+const cors = require('cors');
 var jwt = require('jsonwebtoken');
 require('dotenv').config();
 const UserSchema = require('./src/models/UserSchema');
+
 
 mongoose
   .connect(
@@ -13,6 +15,13 @@ mongoose
   .then(() => {
     const app = express();
     app.use(express.json());
+    app.use(
+      cors({
+        origin: process.env.FRONTEND_URL ?? "http://localhost:3000",
+        optionsSuccessStatus: 200,
+        credentials: true,
+      })
+    )
 
     app.get('/users', async (req, res) => {
       const users = await UserSchema.find();
@@ -23,7 +32,7 @@ mongoose
       const { email, password, firstName, lastName } = req.body;
       const user = new UserSchema(req.body);
 
-      if (!email || !password || !firstName || !lastName) {
+      if (!firstName || !lastName || !email || !password  ) {
         res.status(400).send({ error: 'Tous les champs doivent être remplis' });
         return;
       }
@@ -33,6 +42,7 @@ mongoose
         user.password = hash;
         await user.save();
         res.send(user);
+        console.log(user)
       } catch (error) {
         console.error(error);
         res.status(500).send({
@@ -44,6 +54,7 @@ mongoose
     app.post('/users/login', async (req, res) => {
       const { email, password } = req.body;
       const user = new UserSchema(req.body);
+      console.log(req.body)
 
       if (!email || !password) {
         res.status(401).send({ error: 'Préciser le mot de passe/email' });
