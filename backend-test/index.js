@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const argon2 = require('argon2');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 var jwt = require('jsonwebtoken');
 require('dotenv').config();
 const UserSchema = require('./src/models/UserSchema');
@@ -9,15 +10,16 @@ const UserSchema = require('./src/models/UserSchema');
 
 mongoose
   .connect(
-    `mongodb+srv://Antoine:bangarang@test-strategin.gwwcb6x.mongodb.net/?retryWrites=true&w=majority`,
+    `${process.env.DB_URL}`,
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => {
     const app = express();
     app.use(express.json());
+    app.use(cookieParser());
     app.use(
       cors({
-        origin: process.env.FRONTEND_URL ?? "http://localhost:3000",
+        origin: process.env.FRONTEND_URL ?? `${process.env.FRONTEND_URL}`,
         optionsSuccessStatus: 200,
         credentials: true,
       })
@@ -70,10 +72,14 @@ mongoose
           const token = jwt.sign({ email: email, password: password }, process.env.JWT_AUTH_SECRET, {expiresIn: 
             '24h'});
           
-          return res.status(200).send({
+          return res.status(200)
+          .cookie("access_token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production"
+          })
+          .send({
             email: email,
             password: password,
-            token: token,
           });
         } else {
           res.status(401).send({ error: 'Préciser le mot de passe/email' });

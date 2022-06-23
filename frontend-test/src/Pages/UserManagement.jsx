@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Footer from '../Components/Commons/Footer';
 import Header from '../Components/Commons/Header';
-import '../CSS/Accueil.css';
+import '../CSS/global.css';
 
 export default function () {
   const [dataUsers, setDataUsers] = useState();
@@ -22,9 +22,10 @@ export default function () {
         <div className='users-container'>
           {dataUsers &&
             dataUsers.map((user) => (
-              <div className='user-item'>
+              <div className='user-item' key={user.email}>
                 <h3>
-                  {user.firstName}
+                  {user.firstName} 
+                  {" "}
                   {user.lastName}
                 </h3>
                 <h3>{user.email}</h3>

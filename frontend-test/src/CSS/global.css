@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
 
-:root{
+:root {
   --background-color: rgb(243, 242, 242);
   --text-color: rgb(174, 144, 115);
   --additional-color1: rgb(218, 194, 167);
@@ -9,18 +9,17 @@
   box-sizing: content-box;
 }
 
-
-.App-header-footer{
+.App-header-footer {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--additional-color1);
-  color: var(--background-color);
+  color: black;
   height: 10vh;
   border: 2px solid var(--additional-color2);
 }
 
-.connexion-page{
+.connexion-page {
   height: 80vh;
   display: flex;
   flex-direction: column;
@@ -28,17 +27,17 @@
   align-items: center;
 }
 
-.footer{
+.footer {
   background-color: var(--additional-color1);
 }
 
-.button-container{
+.button-container {
   display: flex;
   flex: 1;
   justify-content: center;
 }
 
-.button-container button{
+.button-container button {
   width: 50%;
   height: 2rem;
   display: flex;
@@ -47,8 +46,8 @@
   padding: 1rem;
 }
 
-.connexion-component{
-  display: flex ;
+.connexion-component {
+  display: flex;
   flex-direction: column;
   background-color: var(--additional-color1);
   justify-content: center;
@@ -59,19 +58,19 @@
   border-radius: 0px 0px 15px 15px;
 }
 
-.connexion-component form{
+.connexion-component form {
   display: flex;
   align-items: center;
   flex-direction: column;
   width: 80%;
 }
 
-.connexion-component input{
+.connexion-component input {
   width: 25rem;
   height: 1.5rem;
 }
 
-#inputSubmit{
+#inputSubmit {
   font-weight: bold;
   padding: 2rem;
   margin: 2rem;
@@ -81,14 +80,25 @@
   padding: 0.5rem;
 }
 
-.UserManagement{
+.UserManagement {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
 }
 
-.user-item{
+.users-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.users-page h2 {
+  padding: 2rem;
+}
+
+.user-item {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -97,20 +107,12 @@
   background-color: var(--additional-color1);
   margin-right: 1rem;
   margin-bottom: 3rem;
+  border-radius: 15px;
+  -webkit-box-shadow: -1px -1px 15px 5px var(--additional-color1);
+  box-shadow: -1px -1px 15px 5px var(--additional-color1);
 }
 
-.users-page{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.users-page h2{
-  padding: 2rem;
-}
-
-.users-container{
+.users-container {
   display: flex;
   margin-top: 2rem;
   width: 80%;
@@ -118,6 +120,15 @@
   justify-content: space-between;
 }
 
-footer{
-
+.popup-container {
+  background-color: var(--additional-color2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  padding: 2rem;
+  position: absolute;
+  width: 800px;
+  top: 40%;
 }
