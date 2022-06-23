@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 require('dotenv').config()
 
-const DB_URL = process.env.DB_URL ?? "http://localhost:27017"
-mongoose.connect(`mongodb://${DB_URL}` , {
+const DB_URL = process.env.DB_URL ?? "http://localhost:5000"
+mongoose.connect(`mongodb+srv://Antoine:bangarang@test-strategin.gwwcb6x.mongodb.net/?retryWrites=true&w=majority` , {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

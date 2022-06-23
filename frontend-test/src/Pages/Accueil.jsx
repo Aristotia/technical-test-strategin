@@ -1,44 +1,75 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ConnexionInterface from '../Components/Unique/ConnexionInterface';
-import '../CSS/Accueil.css';
+import Header from '../Components/Commons/Header';
+import RegisterInterface from '../Components/Unique/RegisterInterface';
+import '../CSS/global.css';
+import Footer from '../Components/Commons/Footer';
 
 export default function App() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [display, setDisplay] = useState(true);
+  const [popup, setPopup] = useState(false);
+  let navigate = useNavigate();
+  const handleInterfaceDisplay = () => {
+    setDisplay(!display);
+  };
 
-  const handleSubmit = (event, data) => {
-    event.preventDefault();
-
+  const handleConnexion = (data) => {
     axios
-      .get(
-        `mongodb+srv://<username>:<password>@test-strategin.gwwcb6x.mongodb.net/?retryWrites=true&w=majority` ??
-          'http://localhost:27017',
-        {
-          email: email,
-          password: password,
-        }
-      )
-      .then((data) => console.log(data))
+      .post(`${import.meta.env.VITE_BACKEND_URL}/users/login`, data)
+      .then(() => {
+        navigate('/users', { replace: true });
+      })
       .catch((error) => console.error(error));
   };
 
-  const handleChangeEmail = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handleChangePassword = (event) => {
-    setPassword(event.target.value);
+  const handleRegister = (data) => {
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/users/register`, data)
+      .then((data) => console.log(data), setPopup(!popup))
+      .catch((error) => console.error(error));
   };
 
   return (
     <div className='App'>
-      <header className='App-header'>
-        <h1>My technical test for Strateg.in</h1>
-      </header>
+      <Header />
       <main className='connexion-page'>
-        <ConnexionInterface />
+        <div className='interface-container'>
+          <div className='button-container'>
+            <button type='button' onClick={handleInterfaceDisplay}>
+              <h3>Se connecter</h3>
+            </button>
+            <button type='button' onClick={handleInterfaceDisplay}>
+              <h3>Créer un compte</h3>
+            </button>
+          </div>
+          {display ? (
+            <ConnexionInterface
+              handleConnexion={handleConnexion}
+            />
+          ) : (
+            <RegisterInterface
+              handleRegister={handleRegister}
+            />
+          )}
+        </div>
+        {popup ? (
+          <div className='popup-container'>
+            <h3>Enregistrement réussi !</h3>
+            <button
+              type='button'
+              onClick={() => {
+                setPopup(!popup);
+                setDisplay(!display);
+              }}
+            >
+              Fermer
+            </button>
+          </div>
+        ) : null}
       </main>
+      <Footer />
     </div>
   );
 }
